@@ -74,14 +74,41 @@ var sumBelow = function(n) {
 
   if (neg) {
     return -(n + sumBelow(n - 1) - 1);
-  } else {
-    return n + sumBelow(n - 1) - 1;
   }
+
+  return n + sumBelow(n - 1) - 1;
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  let integers = [];
+
+  if (x === y) {
+    return [];
+  }
+  if (x - y === 1 || y - x === 1) {
+    return [];
+  }
+
+  let reverse = false;
+  if (x > y) {
+    m = x;
+    x = y;
+    y = m;
+    reverse = true;
+  }
+
+  while (x < y - 1) {
+    x++;
+    integers.push(x);
+    range(x, y);
+  }
+
+  if (reverse) {
+    integers.reverse();
+  }
+  return integers;
 };
 
 // 7. Compute the exponent of a number.
