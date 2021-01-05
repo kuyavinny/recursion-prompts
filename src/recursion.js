@@ -81,14 +81,18 @@ var sumBelow = function(n) {
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
   let integers = [];
-
+  
+  // inputs same, no integers in between
   if (x === y) {
     return [];
   }
+  
+  // inputs only one number above each other, no integers in between
   if (x - y === 1 || y - x === 1) {
     return [];
   }
 
+  
   let reverse = false;
   if (x > y) {
     m = x;
@@ -171,9 +175,38 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
-  if (x === 0 || y === 0) {
+  if (y === 0) {
     return NaN;
   }
+
+  if (x === 0) {
+    return 0;
+  }
+
+  if ((x > 0 && y > 0) && x < y) {
+    return x;
+  }
+
+  if (x < 0 && y > 0) {
+    x = x - x - x;
+    return -modulo(x, y);
+  }
+
+  if (x < 0 && y < 0) {
+    x = x - x - x;
+    y = y - y - y;
+    if (y > x) {
+      return -x;
+    } else {
+      return -modulo(x, y);
+    }
+
+  }
+  if (x - y < y) {
+    return x - y;
+  }
+
+  return modulo(x-y, y);
 
 };
 
